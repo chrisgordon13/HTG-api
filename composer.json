@@ -1,0 +1,8 @@
+{
+    "require": {
+	    "slim/slim": "2.*",
+	    "slim/middleware": "*",
+        "j4mie/idiorm": "v1.4.0",
+        "pimple/pimple": "2.0.*@dev"
+    }
+}
