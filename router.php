@@ -5,7 +5,7 @@
 //$app = new \Slim\Slim($deps['slim_options']);
 $app = new \Slim\Slim();
 
-$app->deps  = $deps;
+//$app->deps  = $deps;
 
 // Route handlers
 //foreach (glob("routes/*.php") as $filename) {
