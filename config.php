@@ -1,8 +1,8 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-//require $_SERVER['DOCUMENT_ROOT'] . '/lib/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/lib/autoload.php';
 
-$deps                   = new Pimple();
+//$deps                   = new Pimple();
 
 //$deps['slim_options']   = ['debug' => true];
 /*
