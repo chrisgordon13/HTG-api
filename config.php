@@ -2,9 +2,9 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 //require $_SERVER['DOCUMENT_ROOT'] . '/lib/autoload.php';
 
-$deps                   = new Pimple();
+//$deps                   = new Pimple();
 
-$deps['slim_options']   = ['debug' => true];
+//$deps['slim_options']   = ['debug' => true];
 /*
 $deps['salt']           = '$2y$11$' . substr(md5(uniqid(rand(),true)), 0, 22);
 
