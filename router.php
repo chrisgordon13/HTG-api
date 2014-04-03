@@ -1,4 +1,5 @@
 <?php
+/*
 // Config supplies a dependency container named $deps
 require 'config.php';
 
@@ -12,3 +13,5 @@ foreach (glob("routes/*.php") as $filename) {
 }
 
 $app->run();
+*/
+phpinfo();
