@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 // Config supplies a dependency container named $deps
 require 'config.php';
 
