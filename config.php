@@ -2,7 +2,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/lib/autoload.php';
 
-$deps = new Pimple();
+$depsrrr = new Pimple();
 
 //$deps['slim_options']   = ['debug' => true];
 /*
