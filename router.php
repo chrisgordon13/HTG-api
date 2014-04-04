@@ -2,14 +2,13 @@
 // Config supplies a dependency container named $deps
 require 'config.php';
 
-//$app = new \Slim\Slim($deps['slim_options']);
-$app = new \Slim\Slim();
+$app = new \Slim\Slim($deps['slim_options']);
 
-//$app->deps  = $deps;
+$app->deps  = $deps;
 
 // Route handlers
-//foreach (glob("routes/*.php") as $filename) {
-//    require $filename;
-//}
+foreach (glob("routes/*.php") as $filename) {
+    require $filename;
+}
 
 $app->run();
