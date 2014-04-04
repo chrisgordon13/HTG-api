@@ -2,6 +2,11 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/lib/autoload.php';
 
+if (class_exists('Pimple')) {
+    echo "yep";
+} else {
+    echo "nope";
+}
 //$depsrrr = new Pimple();
 
 //$deps['slim_options']   = ['debug' => true];
