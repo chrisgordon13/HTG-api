@@ -8,6 +8,7 @@ $app->group('/Airports', function() use ($app) {
     $app->get('/', function() use ($app, $auth, $orm) {
         //$auth->check($app, 'Airports', 'List');
 
+        echo phpinfo();
         try {
             $airports = $orm::forTable('airport')->findArray();
 
