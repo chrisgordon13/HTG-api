@@ -1,5 +1,7 @@
 <?php
 
+echo phpinfo();
+
 $app->group('/Airports', function() use ($app) {
 
     $auth   = $app->deps['auth'];
