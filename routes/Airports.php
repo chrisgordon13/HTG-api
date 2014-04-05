@@ -9,7 +9,7 @@ $app->group('/Airports', function() use ($app) {
         //$auth->check($app, 'Airports', 'List');
 
         try {
-            $airports = $orm::forTable('airport')->findArray();
+            $airports = $orm::forTable('airport')->limit(20)->findArray();
 
             //print_r($airports);
             //$app->response->setStatus(200);
