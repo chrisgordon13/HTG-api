@@ -1,17 +1,17 @@
 <?php
 
-$app->group('/Airports', function() use ($app) {
+$app->group('/Cities', function() use ($app) {
 
     $auth   = $app->deps['auth'];
     $orm    = $app->deps['orm'];
 
     $app->get('/', function() use ($app, $auth, $orm) {
-        //$auth->check($app, 'Airports', 'List');
+        //$auth->check($app, 'Cities', 'List');
 
         try {
-            $airports = $orm::forTable('airport')->findArray();
+            $citys = $orm::forTable('city')->findArray();
 
-            $app->response->write(json_encode($airports, JSON_PRETTY_PRINT));
+            $app->response->write(json_encode($citys, JSON_PRETTY_PRINT));
 
         } catch (Exception $e) {
 
@@ -21,7 +21,7 @@ $app->group('/Airports', function() use ($app) {
     });
 
     $app->post('/', function() use ($app, $auth, $orm) {
-        //$auth->check($app, 'Airports', 'Post');
+        //$auth->check($app, 'Cities', 'Post');
 
         try {
             $body = json_decode($app->request->getBody());
@@ -31,23 +31,23 @@ $app->group('/Airports', function() use ($app) {
             }
 
             if (!property_exists($body, 'name') || $body->name == '') {
-                throw new Exception('An airportanization name is required');
+                throw new Exception('An cityanization name is required');
             }
 
-            $airport    = $orm::forTable('airport')->create();
+            $city    = $orm::forTable('city')->create();
 
             $key    = $app->deps['key'];
-            $id     = 'airport-' . $key->create();
+            $id     = 'city-' . $key->create();
 
-            $airport->set('id', $id);
-            $airport->set('name', $body->name);
-            $airport->setExpr('date_added', 'NOW()');
-            $airport->setExpr('date_updated', 'NOW()');
+            $city->set('id', $id);
+            $city->set('name', $body->name);
+            $city->setExpr('date_added', 'NOW()');
+            $city->setExpr('date_updated', 'NOW()');
 
-            $airport->save();
+            $city->save();
 
             $app->response->setStatus(201);
-            $app->response->headers->set('Location', "Airports/$id");
+            $app->response->headers->set('Location', "Cities/$id");
 
         } catch (Exception $e) {
 
@@ -57,12 +57,12 @@ $app->group('/Airports', function() use ($app) {
     });
 
     $app->get('/:id', function($id) use ($app, $auth, $orm) {
-        //$auth->check($app, 'Airports', 'Get');
+        //$auth->check($app, 'Cities', 'Get');
 
         try {
-            $airport = $orm::forTable('airport')->findOne($id);
+            $city = $orm::forTable('city')->findOne($id);
 
-            $app->response->write(json_encode($airport->asArray(), JSON_PRETTY_PRINT));
+            $app->response->write(json_encode($city->asArray(), JSON_PRETTY_PRINT));
 
         } catch (Exception $e) {
 
@@ -72,7 +72,7 @@ $app->group('/Airports', function() use ($app) {
     });
 
     $app->put('/:id', function($id) use ($app, $auth, $orm) {
-        //$auth->check($app, 'Airports', 'Put');
+        //$auth->check($app, 'Cities', 'Put');
 
         try {
 
@@ -82,15 +82,15 @@ $app->group('/Airports', function() use ($app) {
                 throw new Exception('Posted data is missing or malformed');
             }
 
-            $airport = $orm::forTable('airport')->findOne($id);
+            $city = $orm::forTable('city')->findOne($id);
 
             if (property_exists($body, 'name') && $body->name != '') {
-                $airport->set('name', $body->name);
+                $city->set('name', $body->name);
             }
 
-            $airport->setExpr('date_updated', 'NOW()');
+            $city->setExpr('date_updated', 'NOW()');
 
-            $airport->save();
+            $city->save();
 
             $app->response->setStatus(204);
 
@@ -102,14 +102,14 @@ $app->group('/Airports', function() use ($app) {
     });
 
     $app->delete('/:id', function($id) use ($app, $auth, $orm) {
-        //$auth->check($app, 'Airports', 'Delete');
+        //$auth->check($app, 'Cities', 'Delete');
 
         try {
-            $airport = $orm::forTable('airport')->findOne($id);
+            $city = $orm::forTable('city')->findOne($id);
 
-            $airport->setExpr('date_archived', 'NOW()');
+            $city->setExpr('date_archived', 'NOW()');
 
-            $airport->save();
+            $city->save();
 
             $app->response->setStatus(204);
 
