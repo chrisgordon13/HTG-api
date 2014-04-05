@@ -11,6 +11,7 @@ $app->group('/Airports', function() use ($app) {
         try {
             $airports = $orm::forTable('airport')->findArray();
 
+            print_r($airports);
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->write(json_encode($airports, JSON_PRETTY_PRINT));
