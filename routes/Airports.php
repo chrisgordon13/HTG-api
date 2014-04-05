@@ -8,13 +8,11 @@ $app->group('/Airports', function() use ($app) {
     $app->get('/', function() use ($app, $auth, $orm) {
         //$auth->check($app, 'Airports', 'List');
 
-        $app->response->write("test");
         try {
             $airports = $orm::forTable('airport')->findArray();
 
-            print_r($airports);
-            //$app->response->setStatus(200);
-            //$app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
             $app->response->write(json_encode($airports, JSON_PRETTY_PRINT));
 
         } catch (Exception $e) {
@@ -23,7 +21,7 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
-/*
+
     $app->post('/', function() use ($app, $auth, $orm) {
         //$auth->check($app, 'Airports', 'Post');
 
@@ -123,5 +121,4 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
-    */
 });
