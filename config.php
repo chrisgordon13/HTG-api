@@ -22,7 +22,7 @@ $deps['orm']            = function() {
                             //$orm::configure('username', 'tripnanny');
                             //$orm::configure('password', 'kDb6c$9a');
                             $orm::configure('username', 'healthytravel');
-                            $orm::configure('password', 'rt304X^H#$093JlKb@]]');
+                            $orm::configure('password', 'htg');
 
                             return $orm;
                         };
