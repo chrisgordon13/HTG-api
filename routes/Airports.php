@@ -23,7 +23,7 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
-
+/*
     $app->post('/', function() use ($app, $auth, $orm) {
         //$auth->check($app, 'Airports', 'Post');
 
@@ -123,4 +123,5 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
+    */
 });
