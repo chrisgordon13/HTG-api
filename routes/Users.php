@@ -6,7 +6,7 @@ $app->group('/Users', function() use ($app) {
     $orm    = $app->deps['orm'];                                                                                       
                                                                                                                        
     $app->get('/', function() use ($app, $auth, $orm) {                                                                
-        $auth->check($app, 'Users', 'List');                                                                           
+        //$auth->check($app, 'Users', 'List');                                                                           
                                                                                                                        
         try {                                                                                                          
             $users = $orm::forTable('user')->findArray();                                                              
@@ -21,7 +21,7 @@ $app->group('/Users', function() use ($app) {
     });                                                                                                                
                                                                                                                        
     $app->post('/', function() use ($app, $auth, $orm) {                                                               
-        $auth->check($app, 'Users', 'Post');                                                                           
+        //$auth->check($app, 'Users', 'Post');                                                                           
                                                                                                                        
         try {                                                                                                          
             $body = json_decode($app->request->getBody());                                                             
@@ -67,7 +67,7 @@ $app->group('/Users', function() use ($app) {
     });                                                                                                                
                                                                                                                        
     $app->get('/:id', function($id) use ($app, $auth, $orm) {                                                          
-        $auth->check($app, 'Users', 'Get');                                                                            
+        //$auth->check($app, 'Users', 'Get');                                                                            
                                                                                                                        
         try {                                                                                                          
             $user = $orm::forTable('user')->findOne($id);                                                              
@@ -82,7 +82,7 @@ $app->group('/Users', function() use ($app) {
     });                                                                                                                
                                                                                                                        
     $app->put('/:id', function($id) use ($app, $auth, $orm) {                                                          
-        $auth->check($app, 'Users', 'Put');                                                                            
+        //$auth->check($app, 'Users', 'Put');                                                                            
                                                                                                                        
         try {                                                                                                          
             $body = json_decode($app->request->getBody());                                                             
@@ -123,7 +123,7 @@ $app->group('/Users', function() use ($app) {
     });                                                                                                                
                                                                                                                        
     $app->delete('/:id', function($id) use ($app, $auth, $orm) {                                                       
-        $auth->check($app, 'Users', 'Delete');                                                                         
+        //$auth->check($app, 'Users', 'Delete');                                                                         
                                                                                                                        
         try {                                                                                                          
             $user = $orm::forTable('user')->findOne($id);                                                              
