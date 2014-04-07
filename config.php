@@ -26,3 +26,5 @@ $deps['auth']           = function() { return new AuthHelper; };
 $deps['key']            = function() { return new KeyHelper; };
 
 $deps['date']           = function() { return new DateHelper; };
+
+$deps['geo']            = function() { return new GeoHelper; };

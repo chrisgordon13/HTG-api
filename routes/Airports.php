@@ -4,12 +4,37 @@ $app->group('/Airports', function() use ($app) {
 
     $auth   = $app->deps['auth'];
     $orm    = $app->deps['orm'];
+    $geo    = $app->deps['geo'];
 
-    $app->get('/', function() use ($app, $auth, $orm) {
+    $app->get('/', function() use ($app, $auth, $orm, $geo) {
         //$auth->check($app, 'Airports', 'List');
+/*
+SELECT id, code, name, city, state, country, lat, lon, active, date_added, date_updated,
+ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ), 3) AS distance 
+FROM airports
+WHERE date_archived IS NULL
+ORDER BY distance
+LIMIT $limit
+*/
+        $lat    = $app->request->params('lat');
+        $lon    = $app->request->params('lon');
+        $query  = $app->request->params('q');
+        $limit  = $app->request->params('l');
 
         try {
-            $airports = $orm::forTable('airport')->limit(20)->findArray();
+            if ($geo->isLat($lat) && $geo->isLon($lon)) {
+
+            } 
+            
+            if (!is_null($query)) {
+
+            }
+
+            if (is_numeric($limit) && $limit > 0) {
+                $limit = $limit <= 20 ? (int)$limit : 20;
+            }
+
+            $airports = $orm::forTable('airport')->limit($limit)->findArray();
 
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
