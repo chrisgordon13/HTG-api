@@ -34,7 +34,7 @@ $app->group('/Airports', function() use ($app) {
 
             if (is_numeric($limit) && $limit > 0) {
                 $limit  = $limit <= 20 ? (int)$limit : 20;
-                $sql    = $sql . " LIMIT=$limit";
+                $sql    = $sql . " LIMIT $limit";
             }
 
             if ($raw) {
