@@ -8,22 +8,24 @@ $app->group('/Airports', function() use ($app) {
 
     $app->get('/', function() use ($app, $auth, $orm, $geo) {
         //$auth->check($app, 'Airports', 'List');
-/*
-SELECT id, code, name, city, state, country, lat, lon, active, date_added, date_updated,
-ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ), 3) AS distance 
-FROM airports
-WHERE date_archived IS NULL
-ORDER BY distance
-LIMIT $limit
-*/
+        
+        $raw    = false;
         $lat    = $app->request->params('lat');
         $lon    = $app->request->params('lon');
         $query  = $app->request->params('q');
-        $limit  = $app->request->params('l');
+        $limit  = $app->request->params('limit');
 
         try {
             if ($geo->isLat($lat) && $geo->isLon($lon)) {
-
+                $sql = "
+                    SELECT id, code, name, city, state, country, lat, lon, active, date_added, date_updated,
+                    ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ), 3) AS distance 
+                    FROM airports
+                    WHERE date_archived IS NULL
+                    ORDER BY distance
+                ";
+                $params = array("lat"=>$lat, "lon"=>$lon);
+                $raw = true;
             } 
             
             if (!is_null($query)) {
@@ -34,7 +36,11 @@ LIMIT $limit
                 $limit = $limit <= 20 ? (int)$limit : 20;
             }
 
-            $airports = $orm::forTable('airport')->limit($limit)->findArray();
+            if ($raw) {
+                $airports = $orm::forTable('airport')->rawQuery($sql, $params)->limit($limit)->findArray();
+            } else {
+                $airports = $orm::forTable('airport')->limit($limit)->findArray();
+            }
 
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
