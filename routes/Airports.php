@@ -158,7 +158,7 @@ $app->group('/Airports', function() use ($app) {
     $app->get('/:code/Terminals', function($code) use ($app, $auth, $orm) {
 
         try {
-            $terminals = $orm::forTable('place')->select('airport_code')->select('terminal')->selectExpr('COUNT(id)', 'places')->where('airport_code', $code)->whereNotEqual('terminal', '')groupBy('terminal')->orderByAsc('terminal')->findArray();
+            $terminals = $orm::forTable('place')->select('airport_code')->select('terminal')->selectExpr('COUNT(id)', 'places')->where('airport_code', $code)->whereNotEqual('terminal', '')->groupBy('terminal')->orderByAsc('terminal')->findArray();
             
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
