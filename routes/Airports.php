@@ -20,7 +20,7 @@ $app->group('/Airports', function() use ($app) {
                 $sql = "
                     SELECT id, code, name, city, state, country, lat, lon, active, date_added, date_updated,
                     ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ), 3) AS distance 
-                    FROM airports
+                    FROM airport
                     WHERE date_archived IS NULL
                     ORDER BY distance
                 ";
