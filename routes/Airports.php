@@ -153,4 +153,21 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
+
+
+    $app->get('/:code/Terminals', function($code) use ($app, $auth, $orm) {
+
+        try {
+            $terminals = $orm::forTable('place')->select('terminal')->where('airport_code', $code)->findArray();
+            
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->write(json_encode($terminals));
+
+        } catch (Exception $e) {
+
+            $app->response->setStatus(400);
+            $app->response->headers->set('Error', $e->getMessage());
+        }
+    });
 });
