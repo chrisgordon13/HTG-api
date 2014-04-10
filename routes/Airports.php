@@ -33,11 +33,12 @@ $app->group('/Airports', function() use ($app) {
             }
 
             if (is_numeric($limit) && $limit > 0) {
-                $limit = $limit <= 20 ? (int)$limit : 20;
+                $limit  = $limit <= 20 ? (int)$limit : 20;
+                $sql    = $sql . " LIMIT=$limit";
             }
 
             if ($raw) {
-                $airports = $orm::forTable('airport')->rawQuery($sql, $params)->limit($limit)->findArray();
+                $airports = $orm::forTable('airport')->rawQuery($sql, $params)->findArray();
             } else {
                 $airports = $orm::forTable('airport')->limit($limit)->findArray();
             }
