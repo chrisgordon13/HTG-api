@@ -170,4 +170,20 @@ $app->group('/Airports', function() use ($app) {
             $app->response->headers->set('Error', $e->getMessage());
         }
     });
+
+    $app->get('/:code/Terminals/:terminal_id/Places', function($code, $terminal_id) use ($app, $auth, $orm) {
+
+        try {
+            $places = $orm::forTable('place')->where('airport_code', $code)->where('id', $terminal_id)->orderByAsc('gate')->findArray();
+            
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->write(json_encode($terminals));
+
+        } catch (Exception $e) {
+
+            $app->response->setStatus(400);
+            $app->response->headers->set('Error', $e->getMessage());
+        }
+    });
 });
