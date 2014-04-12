@@ -171,10 +171,10 @@ $app->group('/Airports', function() use ($app) {
         }
     });
 
-    $app->get('/:code/Terminals/:terminal_id/Places', function($code, $terminal_id) use ($app, $auth, $orm) {
+    $app->get('/:code/Terminals/:terminal/Places', function($code, $terminal) use ($app, $auth, $orm) {
 
         try {
-            $places = $orm::forTable('place')->where('airport_code', $code)->where('id', $terminal_id)->orderByAsc('gate')->findArray();
+            $places = $orm::forTable('place')->where('airport_code', $code)->where('terminal', $terminal)->orderByAsc('gate')->findArray();
             
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
