@@ -174,7 +174,7 @@ $app->group('/Airports', function() use ($app) {
     $app->get('/:code/Terminals/:terminal/Places', function($code, $terminal) use ($app, $auth, $orm) {
 
         try {
-            $places = $orm::forTable('place')->where('airport_code', $code)->where('terminal', $terminal)->orderByExpr('LENGTH(gate + 1), gate + 1')->findArray();
+            $places = $orm::forTable('place')->where('airport_code', $code)->where('terminal', $terminal)->orderByExpr('gate + 1')->findArray();
             
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
