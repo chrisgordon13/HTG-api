@@ -178,7 +178,7 @@ $app->group('/Airports', function() use ($app) {
             
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->write(json_encode($terminals));
+            $app->response->write(json_encode($places));
 
         } catch (Exception $e) {
 
