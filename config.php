@@ -14,7 +14,7 @@ $deps['orm']            = function() {
 
                             $orm = new o;
 
-                            $orm::configure('mysql:host=10.128.12.164;dbname=HealthyTravelGal');
+                            $orm::configure('mysql:host=10.128.12.164;dbname=HealthyTravelGal;charset=utf8');
                             $orm::configure('username', 'htg');
                             $orm::configure('password', 'rt304#$093JlKb');
 

@@ -9,7 +9,12 @@ $app->group('/Places', function() use ($app) {
         //$auth->check($app, 'Places', 'List');
 
         try {
-            $places = $orm::forTable('place')->findArray();
+            if ($app->request->get('type')) {
+                $type = $app->request->get('type');
+                $places = $orm::forTable('place')->where('category', $type)->findArray();
+            } else {
+                $places = $orm::forTable('place')->findArray();
+            }
 
             $app->response->write(json_encode($places, JSON_PRETTY_PRINT));
 
